@@ -545,7 +545,7 @@ def on_ui_tabs():
                             ```py
                             --pretrained_model_name_or_path /content/ACertainty \\
                             --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
-                            --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
+                            --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
                             --output_dir /content/trained \\
                             --xformers \\
                             --max_train_steps 1600 \\
@@ -556,7 +556,7 @@ def on_ui_tabs():
                         train_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/train_network.py \\
                     --pretrained_model_name_or_path /content/ACertainty \\
                     --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
-                    --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
+                    --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
                     --output_dir /content/trained \\
                     --xformers \\
                     --max_train_steps 1600 \\
