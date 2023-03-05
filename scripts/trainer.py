@@ -228,29 +228,29 @@ def on_ui_tabs():
                                                 enerated/torch.optim.Optimizer.zero_grad.html
                         ```
                         """)
-                    train_dreambooth_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/train_dreambooth.py \\
-        --pretrained_model_name_or_path="ckpt/sd15"  \\
-        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/output_dir" \\
-        --learning_rate=5e-6 \\
-        --max_train_steps=650 \\
-        --instance_prompt="parkminyoung" \\
-        --resolution=512 \\
-        --center_crop \\
-        --train_batch_size=1 \\
-        --gradient_accumulation_steps=1 \\
-        --max_grad_norm=1.0 \\
-        --mixed_precision="fp16" \\
-        --gradient_checkpointing \\
-        --enable_xformers_memory_efficient_attention \\
-        --use_8bit_adam \\
-        --with_prior_preservation \\
-        --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/class_data_dir" \\
-        --prior_loss_weight=1.0 \\
-        --sample_batch_size=2 \\
-        --class_prompt="person" \\
-        --seed=69 \\
-        --num_class_images=12"""
+                    train_dreambooth_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/train_dreambooth.py \\
+                --pretrained_model_name_or_path="ckpt/sd15"  \\
+                --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/output_dir" \\
+                --learning_rate=5e-6 \\
+                --max_train_steps=650 \\
+                --instance_prompt="parkminyoung" \\
+                --resolution=512 \\
+                --center_crop \\
+                --train_batch_size=1 \\
+                --gradient_accumulation_steps=1 \\
+                --max_grad_norm=1.0 \\
+                --mixed_precision="fp16" \\
+                --gradient_checkpointing \\
+                --enable_xformers_memory_efficient_attention \\
+                --use_8bit_adam \\
+                --with_prior_preservation \\
+                --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/dreambooth/class_data_dir" \\
+                --prior_loss_weight=1.0 \\
+                --sample_batch_size=2 \\
+                --class_prompt="person" \\
+                --seed=69 \\
+                --num_class_images=12"""
                     dreambooth_command = gr.Textbox(show_label=False, lines=23, value=train_dreambooth_command)
                     train_dreambooth_out_text = gr.Textbox(show_label=False)
                     btn_train_dreambooth_run_live = gr.Button("Train Dreambooth")
@@ -439,26 +439,129 @@ def on_ui_tabs():
                         Whether or not to use xformers.
                         ```
                         """)
-                    train_lora_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/lora/train_dreambooth_lora.py \\
-        --pretrained_model_name_or_path="ckpt/sd15"  \\
-        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/lora/output_dir" \\
-        --learning_rate=5e-6 \\
-        --max_train_steps=650 \\
-        --instance_prompt="parkminyoung" \\
-        --resolution=512 \\
-        --center_crop \\
-        --train_batch_size=1 \\
-        --gradient_accumulation_steps=1 \\
-        --max_grad_norm=1.0 \\
-        --mixed_precision="fp16" \\
-        --gradient_checkpointing \\
-        --enable_xformers_memory_efficient_attention \\
-        --use_8bit_adam"""
+                    train_lora_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/lora/train_dreambooth_lora.py \\
+                --pretrained_model_name_or_path="ckpt/sd15"  \\
+                --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/training/lora/output_dir" \\
+                --learning_rate=5e-6 \\
+                --max_train_steps=650 \\
+                --instance_prompt="parkminyoung" \\
+                --resolution=512 \\
+                --center_crop \\
+                --train_batch_size=1 \\
+                --gradient_accumulation_steps=1 \\
+                --max_grad_norm=1.0 \\
+                --mixed_precision="fp16" \\
+                --gradient_checkpointing \\
+                --enable_xformers_memory_efficient_attention \\
+                --use_8bit_adam"""
                     lora_command = gr.Textbox(show_label=False, lines=16, value=train_lora_command)
                     train_lora_out_text = gr.Textbox(show_label=False)
                     btn_train_lora_run_live = gr.Button("Train Lora")
                     btn_train_lora_run_live.click(run_live, inputs=lora_command, outputs=train_lora_out_text, show_progress=False)
+            with gr.Tab("Train LoRA for WebUI"):
+                with gr.Tab("Tag Images"):
+                    with gr.Box():
+                        with gr.Accordion("Train Lora WebUI Tag Images Common Arguments", open=False):
+                            gr.Markdown(
+                            """
+                            ```py
+                            /content/drive/MyDrive/AI/training/parkminyoung \\
+                            --repo_id SmilingWolf/wd-v1-4-convnext-tagger-v2 \\
+                            --model_dir wd14_tagger_model \\
+                            --thresh 0.35 \\
+                            --batch_size 1 \\
+                            --caption_extension .txt \\
+                            ```
+                            """)                        
+                        train_tag_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/finetune/tag_images_by_wd14_tagger.py \\
+                    /content/drive/MyDrive/AI/training/parkminyoung \\
+                    --repo_id SmilingWolf/wd-v1-4-convnext-tagger-v2 \\
+                    --model_dir wd14_tagger_model \\
+                    --thresh 0.35 \\
+                    --batch_size 1 \\
+                    --caption_extension .txt"""
+                        tag_lora_webui_command = gr.Textbox(show_label=False, lines=16, value=train_tag_lora_webui_command)
+                        train_tag_lora_webui_out_text = gr.Textbox(show_label=False)
+                        btn_train_tag_lora_webui_run_live = gr.Button("Train Lora")
+                        btn_train_tag_lora_webui_run_live.click(run_live, inputs=tag_lora_webui_command, outputs=train_tag_lora_webui_out_text, show_progress=False)
+                with gr.Tab("Merge Tags"):
+                    with gr.Box():
+                        with gr.Accordion("Train Lora WebUI Merge Tags Common Arguments", open=False):
+                            gr.Markdown(
+                            """
+                            ```py
+                            /content/drive/MyDrive/AI/training/parkminyoung \\
+                            /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
+                            --caption_extension .txt \\
+                            ```
+                            """)                        
+                        train_merge_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/finetune/merge_dd_tags_to_metadata.py \\
+                    /content/drive/MyDrive/AI/training/parkminyoung \\
+                    /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
+                    --caption_extension .txt"""
+                        merge_lora_webui_command = gr.Textbox(show_label=False, lines=16, value=train_merge_lora_webui_command)
+                        train_merge_lora_webui_out_text = gr.Textbox(show_label=False)
+                        btn_train_merge_lora_webui_run_live = gr.Button("Train Lora")
+                        btn_train_merge_lora_webui_run_live.click(run_live, inputs=merge_lora_webui_command, outputs=train_merge_lora_webui_out_text, show_progress=False)
+                with gr.Tab("Prepare Latents"):
+                    with gr.Box():
+                        with gr.Accordion("Train Lora WebUI Merge Tags Common Arguments", open=False):
+                            gr.Markdown(
+                            """
+                            ```py
+                            /content/drive/MyDrive/AI/training/parkminyoung \\
+                            --repo_id SmilingWolf/wd-v1-4-convnext-tagger-v2 \\
+                            --model_dir wd14_tagger_model \\
+                            --thresh 0.35 \\
+                            --batch_size 1 \\
+                            --caption_extension .txt \\
+                            ```
+                            """)                        
+                        train_prepare_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/finetune/prepare_buckets_latents.py \\
+                    /content/drive/MyDrive/AI/training/parkminyoung \\
+                    /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
+                    /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
+                    /content/JosephusCheung/ACertainty \\
+                    --batch_size 1 \\
+                    --max_resolution 512,512 \\
+                    --min_bucket_reso 256 \\
+                    --max_bucket_reso 1024 \\
+                    --bucket_reso_steps 64 \\
+                    --mixed_precision no"""
+                        prepare_lora_webui_command = gr.Textbox(show_label=False, lines=16, value=train_prepare_lora_webui_command)
+                        train_prepare_lora_webui_out_text = gr.Textbox(show_label=False)
+                        btn_train_prepare_lora_webui_run_live = gr.Button("Train Lora")
+                        btn_train_prepare_lora_webui_run_live.click(run_live, inputs=prepare_lora_webui_command, outputs=train_prepare_lora_webui_out_text, show_progress=False)
+                with gr.Tab("Train"):
+                    with gr.Box():
+                        with gr.Accordion("Train Lora WebUI Common Arguments", open=False):
+                            gr.Markdown(
+                            """
+                            ```py
+                            --pretrained_model_name_or_path JosephusCheung/ACertainty \\
+                            --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
+                            --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
+                            --output_dir /content/trained \\
+                            --xformers \\
+                            --max_train_steps 1600 \\
+                            --use_8bit_adam \\
+                            --network_module networks.lora \\
+                            ```
+                            """)                        
+                        train_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/train_network.py \\
+                    --pretrained_model_name_or_path JosephusCheung/ACertainty \\
+                    --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
+                    --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
+                    --output_dir /content/trained \\
+                    --xformers \\
+                    --max_train_steps 1600 \\
+                    --use_8bit_adam \\
+                    --network_module networks.lora"""
+                        lora_webui_command = gr.Textbox(show_label=False, lines=16, value=train_lora_webui_command)
+                        train_lora_webui_out_text = gr.Textbox(show_label=False)
+                        btn_train_lora_webui_run_live = gr.Button("Train Lora")
+                        btn_train_lora_webui_run_live.click(run_live, inputs=lora_webui_command, outputs=train_lora_webui_out_text, show_progress=False)
         with gr.Tab("Test"):
             with gr.Tab("Test Dreambooth"):
                 with gr.Group():
