@@ -1,7 +1,7 @@
 import os, launch
 from modules import scripts
 
-sd_scripts_repo_commit_hash = os.environ.get('SD_SCRIPTS_COMMIT_HASH', "f0ae7eea950b93b1550dc34a782da3bafda2a8c0")
+sd_scripts_repo_commit_hash = os.environ.get('SD_SCRIPTS_COMMIT_HASH', "46aee85d2a88e279d9a0a286f579f5f3434a3c56")
 sd_scripts_repo = os.environ.get('SD_SCRIPTS_REPO', "https://github.com/camenduru/sd-scripts")
 sd_scripts_dir = os.path.join(scripts.basedir(), "extensions", "stable-diffusion-webui-trainer", "sd-scripts")
 launch.git_clone(sd_scripts_repo, sd_scripts_dir, "SD Scripts", sd_scripts_repo_commit_hash)
