@@ -511,11 +511,15 @@ def on_ui_tabs():
                             """
                             ```py
                             /content/drive/MyDrive/AI/training/parkminyoung \\
-                            --repo_id SmilingWolf/wd-v1-4-convnext-tagger-v2 \\
-                            --model_dir wd14_tagger_model \\
-                            --thresh 0.35 \\
+                            /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
+                            /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
+                            /content/JosephusCheung/ACertainty \\
                             --batch_size 1 \\
-                            --caption_extension .txt \\
+                            --max_resolution 512,512 \\
+                            --min_bucket_reso 256 \\
+                            --max_bucket_reso 1024 \\
+                            --bucket_reso_steps 64 \\
+                            --mixed_precision no \\
                             ```
                             """)                        
                         train_prepare_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/finetune/prepare_buckets_latents.py \\
@@ -539,7 +543,7 @@ def on_ui_tabs():
                             gr.Markdown(
                             """
                             ```py
-                            --pretrained_model_name_or_path JosephusCheung/ACertainty \\
+                            --pretrained_model_name_or_path /content/JosephusCheung/ACertainty \\
                             --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
                             --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
                             --output_dir /content/trained \\
@@ -550,7 +554,7 @@ def on_ui_tabs():
                             ```
                             """)                        
                         train_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/train_network.py \\
-                    --pretrained_model_name_or_path JosephusCheung/ACertainty \\
+                    --pretrained_model_name_or_path /content/JosephusCheung/ACertainty \\
                     --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
                     --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
                     --output_dir /content/trained \\
