@@ -513,7 +513,7 @@ def on_ui_tabs():
                             /content/drive/MyDrive/AI/training/parkminyoung \\
                             /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
                             /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
-                            /content/JosephusCheung/ACertainty \\
+                            /content/ACertainty \\
                             --batch_size 1 \\
                             --max_resolution 512,512 \\
                             --min_bucket_reso 256 \\
@@ -526,7 +526,7 @@ def on_ui_tabs():
                     /content/drive/MyDrive/AI/training/parkminyoung \\
                     /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung.json \\
                     /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-latents.json \\
-                    /content/JosephusCheung/ACertainty \\
+                    /content/ACertainty \\
                     --batch_size 1 \\
                     --max_resolution 512,512 \\
                     --min_bucket_reso 256 \\
@@ -543,7 +543,7 @@ def on_ui_tabs():
                             gr.Markdown(
                             """
                             ```py
-                            --pretrained_model_name_or_path /content/JosephusCheung/ACertainty \\
+                            --pretrained_model_name_or_path /content/ACertainty \\
                             --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
                             --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
                             --output_dir /content/trained \\
@@ -554,7 +554,7 @@ def on_ui_tabs():
                             ```
                             """)                        
                         train_lora_webui_command = """python -u /content/stable-diffusion-webui/extensions/stable-diffusion-webui-trainer/sd-scripts/train_network.py \\
-                    --pretrained_model_name_or_path /content/JosephusCheung/ACertainty \\
+                    --pretrained_model_name_or_path /content/ACertainty \\
                     --train_data_dir /content/drive/MyDrive/AI/training/parkminyoung \\
                     --in_json /content/drive/MyDrive/AI/training/parkminyoung/parkminyoung-lat.json \\
                     --output_dir /content/trained \\
